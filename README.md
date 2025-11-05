@@ -1,2 +1,12 @@
 # IntelliJ-Typing-Sounds
-Typing sounds for IntelliJ to make coding more fun.
+
+Typing sounds for IntelliJ IDE, similar to Opera GX.
+Personally I feel like having some sort of sound trigger on keypress is helping me focus and stay active when coding.
+
+Hence the Plugin.
+
+____________________________________________________________
+
+### Marketplace link
+
+Under review
