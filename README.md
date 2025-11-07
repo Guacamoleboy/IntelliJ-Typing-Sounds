@@ -9,4 +9,4 @@ ____________________________________________________________
 
 ### Marketplace link
 
-Under review
+https://plugins.jetbrains.com/plugin/28925-keyboard-typing-sounds?noRedirect=true
