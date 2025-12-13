@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.FloatControl
 import java.awt.event.KeyEvent
+import kotlin.math.log10
 
 class SoundPlayer {
 
@@ -43,6 +44,8 @@ class SoundPlayer {
     // __________________________________________________________
 
     fun playSound(keyCode: Int) {
+        // Check if sound is enabled
+        if (!SettingsService.getInstance().isSoundEnabled()) return
 
         val currentTime = System.currentTimeMillis()
 
@@ -75,13 +78,24 @@ class SoundPlayer {
             val clip = AudioSystem.getClip().apply {
                 open(audioStream)
                 val volumeControl = getControl(FloatControl.Type.MASTER_GAIN) as FloatControl
+
+                val baseDb = percentToDb(SettingsService.getInstance().getVolume())
                 val randomOffset = (-5..5).random()
-                volumeControl.value = -28f + randomOffset // Maybe -25f is better for a later version. Needs testing.
+
+                volumeControl.value = (baseDb + randomOffset).coerceIn(volumeControl.minimum, volumeControl.maximum)
+
                 start()
             }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    // Helper to convert percent volume to decibels
+    private fun percentToDb(volumePercent: Int): Float {
+        val p = volumePercent.coerceIn(0, 100)
+        return (20 * log10(p / 100.0)).toFloat()
     }
 
     // __________________________________________________________
