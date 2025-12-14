@@ -12,6 +12,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <editorFactoryListener implementation="dk.project.keyboard.KeyboardSoundListener"/>
+        <applicationConfigurable instance="dk.project.app.SettingsConfigurable"
+                                 displayName="Typing Sounds"/>
     </extensions>
 
 </idea-plugin>
