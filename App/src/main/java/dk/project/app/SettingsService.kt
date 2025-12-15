@@ -1,19 +1,23 @@
+// Package
 package dk.project.app
 
+// Imports
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.openapi.components.service
 
+// Service
 @Service
 @State(name = "dk.project.app.UserSoundSettings", storages = [Storage("userSoundSettings.xml")])
+
 class SettingsService : PersistentStateComponent<SettingsService.State> {
 
     // Inner state class
     data class State(
         var soundEnabled: Boolean = true,
-        var volumePercent: Int = 50
+        var volumePercent: Int = 50                             // Initial Volume (50%)
     )
 
     private var state = State()
@@ -26,7 +30,6 @@ class SettingsService : PersistentStateComponent<SettingsService.State> {
         this.state = state
     }
 
-    // Convenience methods
     fun isSoundEnabled(): Boolean {
         return state.soundEnabled
     }
@@ -46,4 +49,5 @@ class SettingsService : PersistentStateComponent<SettingsService.State> {
     companion object {
         fun getInstance(): SettingsService = service()
     }
+
 }

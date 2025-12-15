@@ -50,6 +50,8 @@ class KeyboardSoundListener : EditorFactoryListener {
 
         })
 
+        // __________________________________________________________
+
         editor.document.addDocumentListener(object : DocumentListener {
 
             override fun beforeDocumentChange(event: DocumentEvent) {}

@@ -1,5 +1,7 @@
+// Package
 package dk.project.app
 
+// Imports
 import com.intellij.openapi.options.Configurable
 import com.intellij.util.ui.JBUI
 import java.awt.BorderLayout
@@ -7,12 +9,18 @@ import java.awt.Component
 import javax.swing.*
 
 class SettingsConfigurable : Configurable {
-    private var panel: JPanel? = null
+
+    // Attributes
+    private var panel: JPanel? = null                               // "?" needed as it's initialized as null
     private var enabledCheck: JCheckBox? = null
     private var volumeSlider: JSlider? = null
 
+    // ____________________________________________________
+
     override fun createComponent(): JComponent? {
+
         if (panel == null) {
+
             panel = JPanel(BorderLayout())
 
             val inner = JPanel()
@@ -37,10 +45,14 @@ class SettingsConfigurable : Configurable {
             inner.add(volumeSlider)
 
             panel!!.add(inner, BorderLayout.NORTH)
+
         }
 
         return panel
+
     }
+
+    // ____________________________________________________
 
     override fun isModified(): Boolean {
         val settings = SettingsService.getInstance()
@@ -49,11 +61,15 @@ class SettingsConfigurable : Configurable {
         return enabledModified || volumeModified
     }
 
+    // ____________________________________________________
+
     override fun apply() {
         val settings = SettingsService.getInstance()
         enabledCheck?.isSelected?.let { settings.setSoundEnabled(it) }
         volumeSlider?.value?.let { settings.setVolume(it) }
     }
+
+    // ____________________________________________________
 
     override fun reset() {
         val settings = SettingsService.getInstance()
@@ -61,13 +77,18 @@ class SettingsConfigurable : Configurable {
         volumeSlider?.value = settings.getVolume()
     }
 
+    // ____________________________________________________
+
     override fun disposeUIResources() {
         panel = null
         enabledCheck = null
         volumeSlider = null
     }
 
+    // ____________________________________________________
+
     override fun getDisplayName(): String {
         return "Typing Sounds"
     }
+
 }
