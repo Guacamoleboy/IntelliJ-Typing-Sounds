@@ -1,18 +1,38 @@
 <idea-plugin>
     <id>dk.project.app</id>
     <name>Keyboard Typing Sounds</name>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
     <vendor email="cph-jl325@stud.ek.dk" url="https://github.com/Guacamoleboy/IntelliJ-Typing-Sounds">Guacamoleboy</vendor>
 
-    <description>
-        Plays keyboard typing sounds in IntelliJ IDEA, similar to Opera GX.
-    </description>
+    <description><![CDATA[
+        <h2>Keyboard Typing Sounds</h2>
+        <p>Enhance your IntelliJ experience by adding realistic keyboard typing sounds, similar to Opera GX.</p>
+
+        <h3>Features</h3>
+        <ul>
+            <li>Custom typing sounds for keys</li>
+            <li>Separate sounds for Enter, Backspace, and other special keys</li>
+            <li>Event sounds for Run Complete and Run Fail</li>
+            <li>Adjustable volume and enable/disable sounds via Settings</li>
+            <li>Open Source - Feel free to contribute</li>
+        </ul>
+
+        <h3>How to Use</h3>
+        <p>Go to <b>Settings → Typing Sounds</b> to enable/disable sounds and adjust volume.</p>
+
+        <p>Thanks for using my plugin!</p>
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
 
+    <project-components>
+        <component>
+            <implementation-class>dk.project.event.EventSoundComponent</implementation-class>
+        </component>
+    </project-components>
+
     <extensions defaultExtensionNs="com.intellij">
-        <startupActivity implementation="dk.project.event.BuildSoundStartup"/>
         <editorFactoryListener implementation="dk.project.keyboard.KeyboardSoundListener"/>
         <applicationConfigurable instance="dk.project.app.SettingsConfigurable"
                                  displayName="Typing Sounds"/>

@@ -8,15 +8,34 @@
 
 */
 
+/* Development
+plugins {
+    id("org.jetbrains.kotlin.jvm") version "1.9.24"                                                     // Kotlin Plugin
+    id("org.jetbrains.intellij") version "1.17.4"                                                       // IntelliJ Platform Plugin
+    id("java")                                                                                          // Java Plugin
+}
+*/
+
+/* BUILD
+plugins {
+    kotlin("jvm") version "2.2.0"
+    id("org.jetbrains.intellij") version "1.17.3"
+    id("java")
+}
+*/
 
 plugins {
-    kotlin("jvm") version "2.2.0"                                                                       // Kotlin Plugin
-    id("org.jetbrains.intellij") version "1.17.3"                                                       // IntelliJ Platform Plugin
-    id("java")                                                                                          // Java Plugin
+    kotlin("jvm") version "2.2.0"
+    id("org.jetbrains.intellij") version "1.17.3"
+    id("java")
 }
 
 group = "dk.project"                                                                                    // Group ID
-version = "1.4.0"                                                                                       // Version Control
+version = "1.5.0"                                                                                       // Version Control
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()                                                                                      // Using maven to get dependencies
@@ -26,12 +45,14 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))                                          // JUnit
     testImplementation("org.junit.jupiter:junit-jupiter")                                               // JUnit Test Framework
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")                                       // JUnit Test Launcher
+    implementation("com.googlecode.soundlibs:jlayer:1.0.1.4")
 }
 
 intellij {
-    version.set("2024.2.2") // version.set("2025.2.1") BUILD | version.set("2024.2.2") TEST             // IntelliJ Version | Publish | Test
+    version.set("2025.2.1") // version.set("2025.2.1") BUILD | version.set("2024.2.2") TEST             // IntelliJ Version | Publish | Test
     type.set("IC")                                                                                      // IntelliJ Community Edition
     plugins.set(listOf("java"))                                                                         // Java IntelliJ Plugin
+    updateSinceUntilBuild.set(false)
     sandboxDir.set(file("${project.buildDir}/idea-sandbox").absolutePath)                               // Sandbox location
 }
 
@@ -71,6 +92,16 @@ tasks {
         jvmArgs = listOf("-Xmx1024m", "-Didea.is.internal=true")
         systemProperty("idea.platform.prefix", "Idea")
     }
+
+    /* Development
+    compileKotlin {
+        kotlinOptions.jvmTarget = "17"
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "17"
+    }
+    */
 
     test {                                                                                              // Test Config
         useJUnitPlatform()                                                                              // JUnit 5

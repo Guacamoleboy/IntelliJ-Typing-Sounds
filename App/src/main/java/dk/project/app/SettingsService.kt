@@ -17,7 +17,8 @@ class SettingsService : PersistentStateComponent<SettingsService.State> {
     // Inner state class
     data class State(
         var soundEnabled: Boolean = true,
-        var volumePercent: Int = 50                             // Initial Volume (50%)
+        var volumePercent: Int = 50,                                            // Initial Volume (50%)
+        var eventSoundsEnabled: Boolean = true
     )
 
     private var state = State()
@@ -44,6 +45,12 @@ class SettingsService : PersistentStateComponent<SettingsService.State> {
 
     fun setVolume(volume: Int) {
         this.state.volumePercent = volume.coerceIn(0, 100)
+    }
+
+    fun isEventSoundsEnabled(): Boolean = state.eventSoundsEnabled
+
+    fun setEventSoundsEnabled(enabled: Boolean) {
+        state.eventSoundsEnabled = enabled
     }
 
     companion object {
