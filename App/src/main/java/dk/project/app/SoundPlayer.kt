@@ -23,6 +23,8 @@ class SoundPlayer {
     private val typingData: ByteArray by lazy { loadSound("/sounds/typing.wav") }
     private val enterData: ByteArray by lazy { loadSound("/sounds/enter2.wav") }
     private val backData: ByteArray by lazy { loadSound("/sounds/back2.wav") }
+    private val completeData: ByteArray by lazy { loadSound("/sounds/complete.wav") }
+    private val abortedData: ByteArray by lazy { loadSound("/sounds/aborted.wav") }
 
     // __________________________________________________________
     // Loads our .wav file and converts it to ByteArray for better stability
@@ -90,7 +92,10 @@ class SoundPlayer {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
     }
+
+    // __________________________________________________________
 
     // Helper to convert percent volume to decibels
     private fun percentToDb(volumePercent: Int): Float {
@@ -101,8 +106,49 @@ class SoundPlayer {
 
     // __________________________________________________________
 
+    private fun playRawSound(soundData: ByteArray) {
+        try {
+            val audioStream = AudioSystem.getAudioInputStream(ByteArrayInputStream(soundData))
+            val clip = AudioSystem.getClip()
+            clip.open(audioStream)
+            clip.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    // __________________________________________________________
+
     fun keyReleased(keyCode: Int) {
         pressedKeys.remove(keyCode)
+    }
+
+    // __________________________________________________________
+
+    fun playBuildComplete() {
+        playRawSound(completeData)
+    }
+
+    // __________________________________________________________
+
+    fun playBuildAborted() {
+        playRawSound(abortedData)
+    }
+
+    // __________________________________________________________
+
+    fun playBuildCompleteAsync() {
+        Thread {
+            playBuildComplete()
+        }.start()
+    }
+
+    // __________________________________________________________
+
+    fun playBuildAbortedAsync() {
+        Thread {
+            playBuildAborted()
+        }.start()
     }
 
 } // SoundPlayer end

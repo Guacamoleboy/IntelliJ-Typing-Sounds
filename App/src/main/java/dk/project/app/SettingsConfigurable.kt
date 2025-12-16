@@ -11,9 +11,10 @@ import javax.swing.*
 class SettingsConfigurable : Configurable {
 
     // Attributes
-    private var panel: JPanel? = null                               // "?" needed as it's initialized as null
+    private var panel: JPanel? = null                                       // "?" needed as it's initialized as null
     private var enabledCheck: JCheckBox? = null
     private var volumeSlider: JSlider? = null
+    private var eventSoundCheck: JCheckBox? = null
 
     // ____________________________________________________
 
@@ -28,11 +29,17 @@ class SettingsConfigurable : Configurable {
             inner.layout = BoxLayout(inner, BoxLayout.Y_AXIS)
             inner.border = JBUI.Borders.empty(10)
 
-            // Enabled checkbox
+            // Typing Sounds Checkout
             enabledCheck = JCheckBox("Enable Typing Sounds")
             enabledCheck!!.alignmentX = Component.LEFT_ALIGNMENT
             inner.add(enabledCheck)
+            inner.add(Box.createVerticalStrut(8))
 
+            // Event Sounds Checkout
+            eventSoundCheck = JCheckBox("Enable Event Sounds")
+            eventSoundCheck!!.alignmentX = Component.LEFT_ALIGNMENT
+            eventSoundCheck!!.isSelected = SettingsService.getInstance().isEventSoundsEnabled()
+            inner.add(eventSoundCheck)
             inner.add(Box.createVerticalStrut(8))
 
             // Volume label and slider
@@ -44,6 +51,7 @@ class SettingsConfigurable : Configurable {
             volumeSlider!!.alignmentX = Component.LEFT_ALIGNMENT
             inner.add(volumeSlider)
 
+            // Add inner to panel
             panel!!.add(inner, BorderLayout.NORTH)
 
         }
@@ -58,7 +66,8 @@ class SettingsConfigurable : Configurable {
         val settings = SettingsService.getInstance()
         val enabledModified = enabledCheck?.isSelected != settings.isSoundEnabled()
         val volumeModified = volumeSlider?.value != settings.getVolume()
-        return enabledModified || volumeModified
+        val eventModified = eventSoundCheck?.isSelected != settings.isEventSoundsEnabled()
+        return enabledModified || volumeModified || eventModified
     }
 
     // ____________________________________________________
@@ -67,6 +76,7 @@ class SettingsConfigurable : Configurable {
         val settings = SettingsService.getInstance()
         enabledCheck?.isSelected?.let { settings.setSoundEnabled(it) }
         volumeSlider?.value?.let { settings.setVolume(it) }
+        eventSoundCheck?.isSelected?.let { settings.setEventSoundsEnabled(it) }
     }
 
     // ____________________________________________________
@@ -75,6 +85,7 @@ class SettingsConfigurable : Configurable {
         val settings = SettingsService.getInstance()
         enabledCheck?.isSelected = settings.isSoundEnabled()
         volumeSlider?.value = settings.getVolume()
+        eventSoundCheck?.isSelected = settings.isEventSoundsEnabled()
     }
 
     // ____________________________________________________
@@ -83,6 +94,7 @@ class SettingsConfigurable : Configurable {
         panel = null
         enabledCheck = null
         volumeSlider = null
+        eventSoundCheck = null
     }
 
     // ____________________________________________________
