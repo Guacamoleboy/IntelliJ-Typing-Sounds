@@ -13,6 +13,7 @@ ____________________________________________________________
 - Delay on typing for better feel and better sync with fast typers. Slow typers won't notice this.
 - Plugin per editor
 - Soundbar for custom sound levels directly in IntelliJ
+- Event Sounds + JPanel to Disable / Enable
 
 ____________________________________________________________
 
