@@ -31,7 +31,7 @@ plugins {
 }
 
 group = "dk.project"                                                                                    // Group ID
-version = "1.5.0"                                                                                       // Version Control
+version = "1.6.0"                                                                                       // Version Control
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -72,7 +72,7 @@ tasks {
         sinceBuild.set("241") // sinceBuild.set("252") | sinceBuild.set("241")                          // Least supported version
         changeNotes.set(                                                                                // Change Notes for publish
             """
-            <p><b>Version 1.5.0</b></p>
+            <p><b>Version 1.6.0</b></p>
             <ul>
                 <li>Custom Audio Settings</li>
                 <li>Sound delay fixes</li>

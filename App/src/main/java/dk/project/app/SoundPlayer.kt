@@ -21,7 +21,7 @@ class SoundPlayer {
     private val cooldownMs = 140L
     private val pressedKeys = mutableSetOf<Int>()
     private val typingData: ByteArray by lazy { loadSound("/sounds/typing.wav") }
-    private val enterData: ByteArray by lazy { loadSound("/sounds/enter.wav") }
+    private val enterData: ByteArray by lazy { loadSound("/sounds/enter2.wav") }
     private val backData: ByteArray by lazy { loadSound("/sounds/back2.wav") }
     private val completeData: ByteArray by lazy { loadSound("/sounds/complete.wav") }
     private val abortedData: ByteArray by lazy { loadSound("/sounds/aborted.wav") }
