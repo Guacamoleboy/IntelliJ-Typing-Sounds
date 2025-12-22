@@ -1,4 +1,4 @@
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/28925)]
+[Downloads](https://img.shields.io/jetbrains/plugin/d/28925)
 
 # IntelliJ-Typing-Sounds
 
