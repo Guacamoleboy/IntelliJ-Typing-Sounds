@@ -1,4 +1,4 @@
-[Downloads](https://img.shields.io/jetbrains/plugin/d/28925)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/28925)](https://plugins.jetbrains.com/plugin/28925-keyboard-typing-sounds)
 
 # IntelliJ-Typing-Sounds
 
