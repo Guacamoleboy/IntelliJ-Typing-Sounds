@@ -1,3 +1,5 @@
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/28925)]
+
 # IntelliJ-Typing-Sounds
 
 Typing sounds for IntelliJ IDE, similar to Opera GX.
